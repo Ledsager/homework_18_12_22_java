@@ -2,11 +2,12 @@ package org.example;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        task1();
+        task2();
     }
 
     public static void task1() {
@@ -18,10 +19,13 @@ public class Main {
         String str = "qqqq we ee assss we we we ee ee qqqq";
         String[] newStr = str.toLowerCase().split(" ");
         for (String inNewStr : newStr) {
-            map.put(inNewStr, 0);
-
-            map.put(inNewStr, (map.get(inNewStr) + 1));
-            System.out.println(inNewStr+' '+map.get(inNewStr));
+//            if (map.containsKey(inNewStr)) {
+                map.putIfAbsent(inNewStr, 0);
+                map.put(inNewStr, (map.get(inNewStr) + 1));
+//                System.out.println(inNewStr + ' ' + map.get(inNewStr));
+//            } else {
+//                map.put(inNewStr, 1);
+//            }
         }
         for (var entry : map.entrySet()) {
             System.out.println("слово - " + entry.getKey() + " , встретилось : " + entry.getValue());
@@ -32,20 +36,22 @@ public class Main {
 //         через map (наполнением значение,
 //         где искомое слово будет являться ключом)
 
-        Map<Character, Integer> map = new HashMap<>();
-        String str = "qqqq we ee assss";
-        for (int i = 0; i < str.length(); i++) {
-            map.putIfAbsent(str.charAt(i),0);
-            map.put(str.charAt(i),map.get(str.charAt(i))+1);
-// if (map.containsKey(str.charAt(i))) {
-// map.put(str.charAt(i), map.get(str.charAt(i)) + 1);
-// } else {
-// map.put(str.charAt(i),1);
-// }
+        Map<String, Integer> map = new HashMap<>();
+        String str = "qqqq we ee assss we we we ee ee qqqq";
+        String inWord;
+        String[] newStr = str.toLowerCase().split(" ");
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Input a word: ");
+        inWord = scanner.next();
+        map.put(inWord, 0);
+        for (String inNewStr : newStr) {
+            if (map.containsKey(inNewStr)) {
+                map.put(inWord, (map.get(inWord) + 1));
+                System.out.println(inNewStr + ' ' + map.get(inNewStr));
+            }
         }
-// for (Map.Entry<Character, Integer> entry :map.entrySet()) {
-        for (var entry :map.entrySet()) {
-            System.out.println("буква - "+entry.getKey()+" , встретилась : "+entry.getValue());
+        for (var entry : map.entrySet()) {
+            System.out.println("слово - " + entry.getKey() + " , встретилось : " + entry.getValue());
         }
     }
 
