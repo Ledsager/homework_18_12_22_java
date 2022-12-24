@@ -14,19 +14,14 @@ public class Main {
 //        Россия идет вперед всей планеты. Планета — это не Россия.
 //                toLoverCase().
         Map<String, Integer> map = new HashMap<>();
-        String str = "qqqq we ee assss we we we ee ee qqqq";
+        String str = "qqqq we ee assss we we we ee ee qqqq We";
         String[] newStr = str.toLowerCase().split(" ");
         for (String inNewStr : newStr) {
-//            if (map.containsKey(inNewStr)) {
             map.putIfAbsent(inNewStr, 0);
             map.put(inNewStr, (map.get(inNewStr) + 1));
-//                System.out.println(inNewStr + ' ' + map.get(inNewStr));
-//            } else {
-//                map.put(inNewStr, 1);
-//            }
         }
         for (var entry : map.entrySet()) {
-            System.out.println("слово - " + entry.getKey() + " , встретилось : " + entry.getValue());
+            System.out.println("слово - " + entry.getKey() + " , встретилось в тексте: " + entry.getValue());
         }
     }
 
@@ -37,14 +32,14 @@ public class Main {
 
         Map<String, Integer> map = new HashMap<>();
         String str = "qqqq We ee assss we we we ee ee qqqq";
-        String inWord;
-        String[] newStr = str.toLowerCase().split(" ");
+//        String inWord;
+        String[] masStr = str.toLowerCase().split(" ");
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Input a word: ");
-        inWord = scanner.next();
+        System.out.print("Enter a search word: ");
+        String inWord = scanner.next();
         inWord = inWord.toLowerCase();
         map.put(inWord, 0);
-        for (String inNewStr : newStr) {
+        for (String inNewStr : masStr) {
             if (map.containsKey(inNewStr)) {
                 map.put(inWord, (map.get(inWord) + 1));
             }
@@ -61,22 +56,23 @@ public class Main {
 //          mas2=[“qwe”,”v”]
 //          Результат:
 //          qwe=3
-        String[] mas1 = new String[]{"qwe","asd","qwe","x"};
-        String[] mas2 = new String[]{"qwe","v","x","x"};
-        Map<String,Integer> map = new HashMap<>();
+        String[] mas1 = new String[]{"qwe", "asd", "qwe", "x"};
+        String[] mas2 = new String[]{"qwe", "v", "x", "x"};
+        Map<String, Integer> map = new HashMap<>();
         for (String item : mas1) {
-            map.put(item,1);
-            for (String item2:mas2) {
+            map.put(item, 1);
+            for (String item2 : mas2) {
                 if (map.containsKey(item2)) {
                     map.put(item2, (map.get(item2) + 1));
                 }
             }
-            if (map.get(item)==1){
+            if (map.get(item) == 1) {
                 map.remove(item);
             }
         }
         for (var entry : map.entrySet()) {
-            System.out.println("слово - " + entry.getKey() + " , встретилось в двух массивах : " + entry.getValue() + " раз(а)");
+            System.out.println("слово - " + entry.getKey() + " , " +
+                    "пересекается в 2х массивах. Общее количество : " + entry.getValue() + " раз(а)");
         }
     }
 }
